@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Syed Aftab – Personal Portfolio
 
 A personal portfolio website built with **Flask** and **HTML/CSS**, showcasing my IT experience, certifications, skills, and career goals.
@@ -92,3 +93,6 @@ http://YOUR_PUBLIC_IP:5000
 
 - LinkedIn: [syed-b-9078141a8](https://www.linkedin.com/in/syed-b-9078141a8/)
 - Credly: [syed-aftab](https://www.credly.com/users/syed-aftab.5fff51e0)
+=======
+Personal portfolio website built with Flask and HTML/CSS, showcasing my IT experience, 20+ certifications, and technical skills. Part of my AWS Bootcamp 2026 journey.
+>>>>>>> 72ffe19d483fbcdcbdb910bf8d49992593447c93
