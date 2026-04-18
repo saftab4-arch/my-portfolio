@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ p.name }} – Portfolio</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">{{ p.name.split()[0] }}.</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="avatar">{{ p.name[0] }}{{ p.name.split()[1][0] }}</div>
+    <h1>Hi, I'm <span>{{ p.name }}</span></h1>
+    <p class="title">{{ p.title }}</p>
+    <p class="location">📍 {{ p.location }}</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn btn-primary">Get In Touch</a>
+      <a href="{{ p.linkedin }}" target="_blank" class="btn btn-secondary">LinkedIn</a>
+      <a href="{{ p.credly }}" target="_blank" class="btn btn-outline">View Badges</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <h2 class="section-title">About Me</h2>
+    <div class="section-divider"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>{{ p.about }}</p>
+      </div>
+      <div>
+        <p class="focus-title">🚀 Currently Focused On</p>
+        <ul class="focus-list">
+          {% for item in p.currently_focused %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <h2 class="section-title">Experience</h2>
+    <div class="section-divider"></div>
+    <div class="timeline">
+      {% for job in p.experience %}
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="job-card">
+          <div class="job-header">
+            <div class="job-title">{{ job.title }}</div>
+            <div class="job-company">{{ job.company }} · {{ job.type }}</div>
+            <div class="job-meta">{{ job.period }} &nbsp;|&nbsp; {{ job.location }}</div>
+          </div>
+          <ul class="job-highlights">
+            {% for h in job.highlights %}
+            <li>{{ h }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <h2 class="section-title">Education</h2>
+    <div class="section-divider"></div>
+    <div class="edu-grid">
+      {% for edu in p.education %}
+      <div class="edu-card">
+        <div class="edu-school">{{ edu.school }}</div>
+        <div class="edu-degree">{{ edu.degree }}</div>
+        {% if edu.period %}<div class="edu-period">{{ edu.period }}</div>{% endif %}
+        {% if edu.details %}<div class="edu-details">{{ edu.details }}</div>{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-inner">
+    <h2 class="section-title">Certifications</h2>
+    <div class="section-divider"></div>
+    <div class="cert-grid">
+      {% for cert in p.certifications %}
+      <div class="cert-card">
+        <div class="cert-name">{{ cert.name }}</div>
+        <div class="cert-meta">{{ cert.issuer }} &nbsp;·&nbsp; Issued {{ cert.year }}{% if cert.expires %} · Expires {{ cert.expires }}{% endif %}</div>
+        <span class="cert-badge">{{ cert.issuer }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <h2 class="section-title">Skills</h2>
+    <div class="section-divider"></div>
+    <div class="skills-grid">
+      {% for category, items in p.skills.items() %}
+      <div class="skill-category">
+        <div class="skill-cat-title">{{ category }}</div>
+        <div class="skill-tags">
+          {% for skill in items %}
+          <span class="tag {% if loop.index is even %}accent{% endif %}">{{ skill }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <h2 class="section-title">Let's Connect</h2>
+    <div class="section-divider"></div>
+    <p>Open to Cloud, DevOps, and Cybersecurity opportunities. Feel free to reach out!</p>
+    <div class="contact-links">
+      <a href="mailto:{{ p.email }}" class="btn btn-primary">✉ Email Me</a>
+      <a href="{{ p.linkedin }}" target="_blank" class="btn btn-secondary">LinkedIn</a>
+      <a href="{{ p.credly }}" target="_blank" class="btn btn-outline">Credly Badges</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Built with Flask &nbsp;·&nbsp; <span>{{ p.name }}</span> &nbsp;·&nbsp; {{ p.location }}</p>
+</footer>
+
+</body>
+</html>
